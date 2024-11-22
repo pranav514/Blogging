@@ -9,8 +9,30 @@ const blogRoute = new Hono<{
       JWT_SECRET: string;
     };
   }>();
+  blogRoute.get("/bulk", async (c) => {
+    const prisma = new PrismaClient({
+      datasourceUrl: c.env.DATABASE_URL,
+    }).$extends(withAccelerate());
+    try {
+      const blogs = await prisma.blog.findMany({
+        select: {
+          title: true,
+          content: true,
+          published: true,
+          author: {
+            select  :{
+                firstname : true
+            }
+          }
+        },
+      });
+      return c.json({ message: "blogs fetched succesfully", blogs: blogs });
+    } catch (err) {
+      return c.json({ error: "cannot fetch the blog" });
+    }
+  });
   blogRoute.use("/", authMiddleware);
-  blogRoute.use("/:id/*", authMiddleware);
+  blogRoute.use("/:id", authMiddleware);
 //   blogRoute.use("/api/v1/blog", authMiddleware);
   
   blogRoute.post("/", async (c) => {
@@ -81,28 +103,7 @@ const blogRoute = new Hono<{
     }
   });
   
-  blogRoute.get("/bulk", async (c) => {
-    const prisma = new PrismaClient({
-      datasourceUrl: c.env.DATABASE_URL,
-    }).$extends(withAccelerate());
-    try {
-      const blogs = await prisma.blog.findMany({
-        select: {
-          title: true,
-          content: true,
-          published: true,
-          author: {
-            select  :{
-                firstname : true
-            }
-          }
-        },
-      });
-      return c.json({ message: "blogs fetched succesfully", blogs: blogs });
-    } catch (err) {
-      return c.json({ error: "cannot fetch the blog" });
-    }
-  });
+  
 
   blogRoute.get("/:id" , async(c) => {
     const prisma =  new PrismaClient({
