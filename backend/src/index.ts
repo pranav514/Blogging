@@ -12,7 +12,7 @@ const app = new Hono<{
   }
 }>();
 
-app.use('/api/v1/blog/*', authMiddleware);
+app.use('/api/v1/blog', authMiddleware);
 app.use('/api/v1/blog/:id/*' , authMiddleware)
 app.use('/api/v1/blog' , authMiddleware);
 
@@ -146,5 +146,24 @@ app.get('/api/v1/blog',async (c) => {
   }
 })
 
+app.get('/api/v1/bulk' , async(c) => {
+  const prisma = new PrismaClient({
+    datasourceUrl : c.env.DATABASE_URL
+  }).$extends(withAccelerate())
+  try{
+    const blogs = await prisma.blog.findMany({
+      select : {
+        title : true,
+        content : true,
+        published : true,
+        authorId : true,
+        author : true,
+      }
+    })
+    return c.json({message : "blogs fetched succesfully" , blogs:blogs})
+  }catch(err){
+    return c.json({error : "cannot fetch the blog"})
+  }
+})
 
 export default app
