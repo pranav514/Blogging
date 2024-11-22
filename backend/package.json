@@ -5,6 +5,8 @@
     "deploy": "wrangler deploy --minify"
   },
   "dependencies": {
+    "@pranavsalunkhe2003/types-exp": "^1.0.0",
+    "@pranavsalunkhe2003/types-export": "^1.0.0",
     "@prisma/client": "^5.22.0",
     "@prisma/extension-accelerate": "^1.2.1",
     "hono": "^4.6.11",

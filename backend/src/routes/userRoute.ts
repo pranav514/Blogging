@@ -2,6 +2,7 @@ import { Hono, Next } from "hono";
 import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { sign } from "hono/jwt";
+import {registerSchema , loginSchema  } from "@pranavsalunkhe2003/types-exp";
 
 const userRoute = new Hono<{
     Bindings: {
@@ -16,6 +17,11 @@ userRoute.post("/register", async (c) => {
     }).$extends(withAccelerate());
     try {
       const body = await c.req.json();
+      const success =  registerSchema.safeParse(body)
+      console.log(success.success)
+      if(!success.success){
+        return c.json({ message: "Invalid request" } , 411);
+      }
       const { email, password, firstname, lastname } = body;
       if (!email || !password || !firstname || !lastname) {
         return c.json({ error: "add the compelete information" });
@@ -44,12 +50,16 @@ userRoute.post("/register", async (c) => {
     }
   });
 
-  userRoute.post("/api/v1/login", async (c) => {
+  userRoute.post("/login", async (c) => {
     const prisma = new PrismaClient({
       datasourceUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate());
     try {
       const body = await c.req.json();
+      const success = loginSchema.safeParse(body)
+      if(!success.success){
+        return c.json({error :"center the correct information"} , 411);
+      }
       const { email, password } = body;
       if (!email || !password) {
         return c.json({ error: "enter the email or password" });

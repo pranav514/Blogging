@@ -2,7 +2,7 @@ import { Hono, Next } from "hono";
 import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { authMiddleware } from "../utils/authentication";
-
+import { blogSchema , updateBlog } from "@pranavsalunkhe2003/types-exp";
 const blogRoute = new Hono<{
     Bindings: {
       DATABASE_URL: string;
@@ -42,11 +42,15 @@ const blogRoute = new Hono<{
     try {
       const userId = c.get("jwtPayload");
       const body = await c.req.json();
-      const { title, description } = body;
+    const success = blogSchema.safeParse(body);
+if (!success.success) {
+    return c.json({ error: "invalid request" } , 411);
+}
+      const { title, content } = body;
       const blog = await prisma.blog.create({
         data: {
           title: title,
-          content: description,
+          content: content,
           published: true,
           authorId: userId,
         },
@@ -65,7 +69,22 @@ const blogRoute = new Hono<{
       const id = c.req.param("id");
       const userId = c.get("jwtPayload");
       const body = await c.req.json();
-      const { title, description } = body;
+      const success = updateBlog.safeParse(body)
+      if (!success.success) {
+        return c.json({ error: "invalid request" } , 411);
+      }
+      const { title, content } = body;
+       const blogExists = await prisma.blog.findUnique({
+        where: {
+            id: id,
+        }
+       })
+       if (!blogExists) {
+        return c.json({ error: "blog not found" });
+       }
+       if(blogExists.authorId !== userId){
+        return c.json({ error: "you are not the author of this blog" } , 411);
+       }
       const blog = await prisma.blog.update({
         where: {
           id: id,
@@ -73,7 +92,7 @@ const blogRoute = new Hono<{
         },
         data: {
           title: title,
-          content: description,
+          content: content,
         },
       });
       return c.json({ message: "Blog updated succesfully", blog: blog });
