@@ -76,7 +76,7 @@ userRoute.post("/register", async (c) => {
         return c.json({ error: "enter the correct password" });
       }
       const token = await sign({ id: user.id }, c.env.JWT_SECRET);
-      return c.json({ message: "user loged in successfully", token });
+      return c.json({ message: "user loged in successfully",user , token });
     } catch (err) {
       return c.json({ error: "error in login" });
     }

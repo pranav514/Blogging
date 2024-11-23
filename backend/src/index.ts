@@ -5,6 +5,8 @@ import { sign } from "hono/jwt";
 import { authMiddleware } from "./utils/authentication";
 import userRoute from "./routes/userRoute";
 import blogRoute from "./routes/blogRoute";
+import { cors } from "hono/cors";
+
 const app = new Hono<{
   Bindings: {
     DATABASE_URL: string;
@@ -12,6 +14,7 @@ const app = new Hono<{
   };
 }>();
 
+app.use(cors())
 // app.use("/api/v1/blog/", authMiddleware);
 // app.use("/api/v1/blog/:id/", authMiddleware);
 // app.use("/api/v1/blog", authMiddleware);
