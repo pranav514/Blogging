@@ -33,7 +33,7 @@ interface Blog{
         <AppBar />
         {blogs.map((blog) => {
           return (
-            <div className='font-bold underline bg-slate-600'>
+            <div className='font-bold' >
               <h1>{blog.title}</h1>
               <p>{blog.content}</p>
               <p>{blog.author.firstname}</p>

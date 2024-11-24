@@ -2,37 +2,45 @@ import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
-
-function BlogPostForm  ()  {
+import DOMPurify from 'dompurify';
+function removeHtMLTags(content : string){
+    const cleantext = content.replace(/<[^>]*>/g, '')
+    return cleantext;
+}
+function BlogPostForm() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem('token');
 
-  const handleSubmit = async (e : React.MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     if (!title || !content) {
       alert('Both title and content are required.');
       return;
     }
- 
+
     try {
       setLoading(true);
-      console.log("here present");
-      console.log(token)
-      const response = await axios.post('http://localhost:8787/api/v1/blog', {
-        title,
-        content
-      } , {
-        headers: {
-            'Authorization': `Bearer ${token}`
+      console.log(content)
+      const sanitizedContent = removeHtMLTags(content)
+      console.log(sanitizedContent)
+
+      const response = await axios.post(
+        'http://localhost:8787/api/v1/blog',
+        { title, content: sanitizedContent },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      });
+      );
+
       alert('Blog posted successfully!');
-      console.log(response.data);
       setTitle('');
       setContent('');
+      console.log(response.data);
     } catch (error) {
       console.error('Error posting blog:', error);
       alert('Failed to post the blog.');
@@ -44,7 +52,7 @@ function BlogPostForm  ()  {
   return (
     <div className="container mx-auto mt-8 max-w-3xl px-4">
       <h1 className="mb-6 text-center text-2xl font-bold text-gray-800">Create a New Blog</h1>
-      <form  className="bg-white p-6 shadow-md rounded-lg">
+      <form className="bg-white p-6 shadow-md rounded-lg">
         <div className="mb-4">
           <label htmlFor="title" className="block text-sm font-medium text-gray-700">
             Blog Title
@@ -82,6 +90,6 @@ function BlogPostForm  ()  {
       </form>
     </div>
   );
-};
+}
 
 export default BlogPostForm;
