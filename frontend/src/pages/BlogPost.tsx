@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
-import DOMPurify from 'dompurify';
 function removeHtMLTags(content : string){
     const cleantext = content.replace(/<[^>]*>/g, '')
     return cleantext;

@@ -16,6 +16,7 @@ const blogRoute = new Hono<{
     try {
       const blogs = await prisma.blog.findMany({
         select: {
+          id: true,
           title: true,
           content: true,
           published: true,
@@ -112,6 +113,7 @@ if (!success.success) {
           authorId: userId,
         },
         select: {
+          id: true,
           title: true,
           content: true,
         },
