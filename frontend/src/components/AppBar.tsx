@@ -32,6 +32,7 @@ function AppBar() {
               onClick={() => {
                 localStorage.removeItem('token');
                 localStorage.removeItem('firstname');
+                navigate('/')
               }}
               className="btn btn-ghost"
             >

@@ -15,7 +15,7 @@ function SingleBlog() {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const response = await axios.get(`http://127.0.0.1:8787/api/v1/blog/${id}`, {
+        const response = await axios.get(`https://backend.pranavsalunkhe327.workers.dev/api/v1/blog/${id}`, {
           headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token'),
           },

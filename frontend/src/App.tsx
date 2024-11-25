@@ -9,6 +9,7 @@ import Register from './pages/Register';
 import BlogPost from './pages/BlogPost';
 import SingleBlog from './pages/SingleBlog';
 import ExploreUserBlog from './pages/ExploreUserBlog';
+import Update from './pages/Update';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path='/blogpost' element = {<BlogPost/>} />
           <Route path='/view/:id' element = {<SingleBlog/>} />
           <Route path='/explore' element = {<ExploreUserBlog/>} />
+          <Route path='/update/:id' element = {<Update />} />
         </Routes>
       </BrowserRouter>
     )

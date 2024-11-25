@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Skeleton from "../components/Skeleton";
 import { useNavigate } from "react-router-dom";
+import AppBar from "../components/AppBar";
 
 interface Blog {
   id: string;
@@ -17,7 +18,7 @@ function ExploreUserBlog() {
   useEffect(() => {
     const res = async () => {
       try {
-        const response = await axios.get("http://localhost:8787/api/v1/blog", {
+        const response = await axios.get("https://backend.pranavsalunkhe327.workers.dev/api/v1/blog", {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
           },
@@ -41,9 +42,12 @@ function ExploreUserBlog() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div>
+        <AppBar />
+        <a href="/" className="underline mt-1  float-left text-blue-500">Home</a>
+         <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-2xl font-bold text-blue-800 mb-6">Your Blogs</h1>
+        <h1 className="text-2xl font-bold text-blue-800 mb-5">Your Blogs</h1>
         <div className="space-y-6">
           {blogList.map((blog) => (
             <div
@@ -67,6 +71,8 @@ function ExploreUserBlog() {
         </div>
       </div>
     </div>
+    </div>
+   
   );
 }
 

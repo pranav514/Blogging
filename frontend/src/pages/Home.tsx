@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import AppBar from '../components/AppBar';
 import { useNavigate } from 'react-router-dom';
 import Skeleton from '../components/Skeleton';
+import Animation from '../components/Animation';
 
 interface Blog {
   id: string;
@@ -21,7 +22,7 @@ function Home() {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get('http://localhost:8787/api/v1/blog/bulk');
+        const response = await axios.get('https://backend.pranavsalunkhe327.workers.dev/api/v1/blog/bulk');
         setBlogs(response.data.blogs || []);
         setLoading(false);
       } catch (err) {

@@ -11,7 +11,7 @@ function Register() {
     const handleSubmit = async (e : React.MouseEvent<HTMLButtonElement>) => {
         try{
             e.preventDefault();
-            const response  = await axios.post("http://127.0.0.1:8787/api/v1/user/register" , {
+            const response  = await axios.post("https://backend.pranavsalunkhe327.workers.dev/api/v1/user/register" , {
             email,
             password,
             firstname,

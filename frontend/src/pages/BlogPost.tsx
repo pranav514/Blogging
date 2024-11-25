@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
+import AppBar from '../components/AppBar';
+import { useNavigate } from 'react-router-dom';
 function removeHtMLTags(content : string){
     const cleantext = content.replace(/<[^>]*>/g, '')
     return cleantext;
@@ -11,6 +13,7 @@ function BlogPostForm() {
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem('token');
+  const navigate = useNavigate()
 
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -27,7 +30,7 @@ function BlogPostForm() {
       console.log(sanitizedContent)
 
       const response = await axios.post(
-        'http://localhost:8787/api/v1/blog',
+        'https://backend.pranavsalunkhe327.workers.dev/api/v1/blog',
         { title, content: sanitizedContent },
         {
           headers: {
@@ -39,17 +42,21 @@ function BlogPostForm() {
       alert('Blog posted successfully!');
       setTitle('');
       setContent('');
+      navigate('/explore')
       console.log(response.data);
     } catch (error) {
       console.error('Error posting blog:', error);
       alert('Failed to post the blog.');
     } finally {
-      setLoading(false);
+      setLoading(false); 
     }
   };
 
   return (
-    <div className="container mx-auto mt-8 max-w-3xl px-4">
+    <div>
+      <AppBar />
+      <a href="/" className='underline text-blue-400 ml-2 mt-1'>Home</a>
+       <div className="container mx-auto mt-8 max-w-3xl px-4">
       <h1 className="mb-6 text-center text-2xl font-bold text-gray-800">Create a New Blog</h1>
       <form className="bg-white p-6 shadow-md rounded-lg">
         <div className="mb-4">
@@ -88,6 +95,8 @@ function BlogPostForm() {
         </button>
       </form>
     </div>
+    </div>
+   
   );
 }
 

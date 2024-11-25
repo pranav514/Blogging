@@ -54,7 +54,7 @@ function Login() {
           <button onClick={async (e) => {
             try{
             e.preventDefault()
-            const res  = await axios.post("http://127.0.0.1:8787/api/v1/user/login" , {
+            const res  = await axios.post("https://backend.pranavsalunkhe327.workers.dev/api/v1/user/login" , {
                 email,
                 password
 
