@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import AppBar from '../components/AppBar';
 import { useNavigate } from 'react-router-dom';
 import Skeleton from '../components/Skeleton';
-import Animation from '../components/Animation';
+
 
 interface Blog {
   id: string;

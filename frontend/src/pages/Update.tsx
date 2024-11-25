@@ -57,6 +57,7 @@ function Update() {
         }
       );
       Setloadstate(false)
+      console.log(response)
     //   alert("Blog updated successfully!");
       navigate("/explore");
     } catch (error) {
