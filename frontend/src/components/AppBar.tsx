@@ -69,7 +69,7 @@ function AppBar() {
           </button>
         ) : (
           <div className="flex items-center space-x-2">
-            <span className="font-semibold"><Avatar value = {firstname[0]} size = {10} /></span>
+            <span className="font-semibold text-sm text-center"><Avatar value = {firstname[0]} size = {5} /></span>
           </div>
         )}
       </div>
