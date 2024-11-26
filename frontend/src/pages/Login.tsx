@@ -7,7 +7,7 @@ function Login() {
     const [password , setPassword] = useState("");
     const navigete = useNavigate();
   return (
-    <div className="grid min-h-screen grid-cols-1 md:grid-cols-2 bg-gray-50">
+    <div className="grid  min-h-screen grid-cols-1 md:grid-cols-2 bg-gray-50">
        <div className="flex min-h-screen items-center justify-center bg-gray-100">
       <div className="w-full max-w-sm rounded-lg bg-white p-6 shadow-md">
         <h2 className="mb-6 text-center text-2xl font-semibold text-gray-700">Login</h2>
@@ -69,15 +69,18 @@ function Login() {
                 alert(err);
             }
 
-          }} className="w-full rounded bg-blue-500 py-2 text-white transition hover:bg-blue-600">
+          }} className="w-full rounded bg-gray-500 py-2 text-white transition hover:bg-gray-600">
             Login
           </button>
-          <p>Don't have an account?<a href='/register' className='text-blue-400 underline'>register</a></p>
+          <p className='text-sm'>Don't have an account? <a href='/register' className='text-blue-400 underline'>register</a></p>
         </form>
       </div>
     </div>
-    <div className="flex items-center justify-center bg-gray-200 px-4 py-8">
-        <Animation />
+    <div className="hidden md:flex items-center justify-center bg-gray-200 px-4 py-8">
+        <blockquote className="text-center text-xl font-semibold text-gray-600 md:text-2xl">
+        "Two things are infinite: the universe and human stupidity; and I'm not sure about the universe". He also said, "Imagination is more important than knowledge. Knowledge is limited. Imagination encircles the world"
+          <footer className="mt-4 text-sm text-gray-500">- Albert Einstein</footer>
+        </blockquote>
       </div>
     </div>
 

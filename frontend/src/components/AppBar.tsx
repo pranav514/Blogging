@@ -1,8 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
+import { Avatar } from "./Avatar";
 
 function AppBar() {
   const token = localStorage.getItem('token');
-  const firstname = localStorage.getItem('firstname');
+
+  const firstname : string = localStorage.getItem('firstname') || "";
   const navigate = useNavigate();
   return (
     <div className="navbar bg-slate-400 shadow-md">
@@ -67,7 +69,7 @@ function AppBar() {
           </button>
         ) : (
           <div className="flex items-center space-x-2">
-            <span className="font-semibold">{firstname}</span>
+            <span className="font-semibold"><Avatar value = {firstname[0]} size = {10} /></span>
           </div>
         )}
       </div>

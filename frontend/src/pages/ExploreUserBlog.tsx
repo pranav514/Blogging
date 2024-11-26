@@ -56,17 +56,17 @@ function ExploreUserBlog() {
             <div
               className="bg-white shadow rounded-lg p-6 hover:shadow-md transition duration-300"
             >
-              <h2 className="text-xl font-semibold text-gray-800 mb-2">
+              <h2 className="text-xl font-bold text-gray-800 mb-2">
                 {blog.title}
               </h2>
-              <p className="text-gray-600 mb-4 line-clamp-3">
+              <p className="text-gray-500 mb-4 line-clamp-3">
                 {blog.content}
               </p>
-              <p className="text-xs text-gray-600 my-2">created At : {formatDate(blog.createdAt)}</p>
-              <p className="text-xs text-gray-600 my-2">updated At : {formatDate(blog.updatedAt)}</p>
+              <p className="text-xs text-gray-400 my-2">created At : {formatDate(blog.createdAt)}</p>
+              <p className="text-xs text-gray-400 my-2">updated At : {formatDate(blog.updatedAt)}</p>
               <button
                 onClick={() => navigate("/update/" + blog.id)}
-                className="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700 transition duration-300"
+                className="px-4 py-2 text-white bg-gray-600 rounded hover:bg-gray-700 transition duration-300"
               >
                 Update
               </button>

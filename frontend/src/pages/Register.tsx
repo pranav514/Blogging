@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Animation from '../components/Animation';
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -86,7 +85,7 @@ function Register() {
             </label>
             <button
               onClick={handleSubmit}
-              className="w-full rounded bg-blue-500 py-2 text-white transition hover:bg-blue-600"
+              className="w-full rounded bg-gray-500 py-2 text-white transition hover:bg-gray-600"
             >
               Register
             </button>
@@ -99,12 +98,12 @@ function Register() {
           </form>
         </div>
       </div>
-      <div className="flex items-center justify-center bg-gray-200 px-4 py-8">
-        {/* <blockquote className="text-center text-xl font-semibold text-gray-600 md:text-2xl">
-          "If I have seen further, it is by standing on the shoulders of giants."
-          <footer className="mt-4 text-sm text-gray-500">- Isaac Newton</footer>
-        </blockquote> */}
-        <Animation />
+
+      <div className="hidden md:flex items-center justify-center bg-gray-200 px-4 py-8">
+        <blockquote className="text-center text-xl font-semibold text-gray-600 md:text-2xl">
+        "Two things are infinite: the universe and human stupidity; and I'm not sure about the universe". He also said, "Imagination is more important than knowledge. Knowledge is limited. Imagination encircles the world"
+        <footer className="mt-4 text-sm text-gray-500">- Albert Einstein</footer>
+        </blockquote>
       </div>
     </div>
   );
