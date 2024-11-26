@@ -1,5 +1,4 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Avatar } from "./Avatar";
 
 function AppBar() {
   const token = localStorage.getItem('token');
