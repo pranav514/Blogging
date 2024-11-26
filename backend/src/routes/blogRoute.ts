@@ -143,6 +143,7 @@ if (!success.success) {
             select:{
                 title:true,
                 content:true,
+                createdAt:true,
                 author : {
                     select:{
                         firstname : true
