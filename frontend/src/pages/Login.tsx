@@ -1,12 +1,14 @@
 import  { useState } from 'react';
 import axios from 'axios';
 import {  useNavigate } from 'react-router-dom';
+import Animation from '../components/Animation';
 function Login() {
     const [email , setEmail] = useState("");
     const [password , setPassword] = useState("");
     const navigete = useNavigate();
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100">
+    <div className="grid min-h-screen grid-cols-1 md:grid-cols-2 bg-gray-50">
+       <div className="flex min-h-screen items-center justify-center bg-gray-100">
       <div className="w-full max-w-sm rounded-lg bg-white p-6 shadow-md">
         <h2 className="mb-6 text-center text-2xl font-semibold text-gray-700">Login</h2>
         <form className="space-y-4">
@@ -74,6 +76,12 @@ function Login() {
         </form>
       </div>
     </div>
+    <div className="flex items-center justify-center bg-gray-200 px-4 py-8">
+        <Animation />
+      </div>
+    </div>
+
+   
   );
 }
 
