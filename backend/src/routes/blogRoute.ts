@@ -19,6 +19,8 @@ const blogRoute = new Hono<{
           id: true,
           title: true,
           content: true,
+          createdAt : true,
+          updatedAt : true,
           published: true,
           author: {
             select  :{
@@ -116,6 +118,8 @@ if (!success.success) {
           id: true,
           title: true,
           content: true,
+          createdAt : true,
+          updatedAt : true,
         },
       });
       return c.json({ message: "blogs fetched succesfully", blogs: blogs });

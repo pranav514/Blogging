@@ -3,12 +3,15 @@ import { useEffect, useState } from 'react';
 import AppBar from '../components/AppBar';
 import { useNavigate } from 'react-router-dom';
 import Skeleton from '../components/Skeleton';
+import { formatDate } from '../utils/dateTime';
 
 
 interface Blog {
   id: string;
   title: string;
   content: string;
+  createdAt : string;
+  updatedAt : string;
   author: {
     firstname: string;
   };
@@ -33,6 +36,7 @@ function Home() {
     fetchBlogs();
   }, []);
 
+
   if (loading) {
     return (
       <div>
@@ -51,7 +55,9 @@ function Home() {
         {blogs.map((blog) => (
           <div  className="mb-8 p-6 border-b border-gray-200">
             <h1 className="text-2xl font-semibold text-blue-800">{blog.title}</h1>
-            <p className="text-sm text-gray-600 my-2">By {blog.author.firstname}</p>
+            <p className="text-sm text-gray-600 my-2 font-bold">By {blog.author.firstname}</p>
+            <p className="text-sm text-gray-600 my-2">created At : {formatDate(blog.createdAt)}</p>
+            <p className="text-sm text-gray-600 my-2">updated At : {formatDate(blog.updatedAt)}</p>
             <p className="text-lg text-gray-700">{blog.content}</p>
             <button onClick={() => {
               navigate('/view/' + blog.id)

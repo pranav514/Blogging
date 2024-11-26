@@ -3,11 +3,14 @@ import { useEffect, useState } from "react";
 import Skeleton from "../components/Skeleton";
 import { useNavigate } from "react-router-dom";
 import AppBar from "../components/AppBar";
+import { formatDate } from "../utils/dateTime";
 
 interface Blog {
   id: string;
   title: string;
   content: string;
+  createdAt : string;
+  updatedAt : string;
 }
 
 function ExploreUserBlog() {
@@ -51,7 +54,6 @@ function ExploreUserBlog() {
         <div className="space-y-6">
           {blogList.map((blog) => (
             <div
-              key={blog.id}
               className="bg-white shadow rounded-lg p-6 hover:shadow-md transition duration-300"
             >
               <h2 className="text-xl font-semibold text-gray-800 mb-2">
@@ -60,6 +62,8 @@ function ExploreUserBlog() {
               <p className="text-gray-600 mb-4 line-clamp-3">
                 {blog.content}
               </p>
+              <p className="text-xs text-gray-600 my-2">created At : {formatDate(blog.createdAt)}</p>
+              <p className="text-xs text-gray-600 my-2">updated At : {formatDate(blog.updatedAt)}</p>
               <button
                 onClick={() => navigate("/update/" + blog.id)}
                 className="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700 transition duration-300"
