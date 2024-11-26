@@ -68,9 +68,9 @@ function AppBar() {
             <Link to={'/login'}>Login</Link>
           </button>
         ) : (
-          <div className="flex items-center space-x-2">
-            <span className="font-semibold text-lg text-center"><Avatar value = {firstname[0]} size = {6} /></span>
-          </div>
+          <div className="relative mt-1 mr-2 inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+        <span className="font-medium text-gray-600 dark:text-gray-300">{firstname[0]}</span>
+    </div>
         )}
       </div>
     </div>
