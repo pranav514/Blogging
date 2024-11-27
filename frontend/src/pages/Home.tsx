@@ -22,7 +22,7 @@ function Home() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-
+  const token = localStorage.getItem('token');
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
@@ -65,7 +65,9 @@ function Home() {
             <p className="text-md text-gray-500">{blog.content.length > 100 ? blog.content.slice(0 , 100) + "...." : blog.content}</p>
             <p className='text-xs text-gray-400'>{Math.ceil(blog.content.length/ 100)} minutes read</p>
             <button onClick={() => {
-              navigate('/view/' + blog.id)
+              token ? navigate('/view/' + blog.id) : alert("login to view the blog")
+              
+              
             }} className='text-green-500'>View</button>
           </div>
         ))}

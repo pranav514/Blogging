@@ -41,7 +41,8 @@ function AppBar() {
             </button>
             <button
               onClick={() => {
-                navigate('/blogpost')
+                token ? navigate('/blogpost') : alert("login to view blog")
+                
               }}
               className="btn btn-ghost"
             >
@@ -49,7 +50,8 @@ function AppBar() {
             </button>
             <button
               onClick={() => {
-                navigate('/explore')
+                token ?  navigate('/explore') : alert("login to view your blog")
+               
               }}
               className="btn btn-ghost"
             >

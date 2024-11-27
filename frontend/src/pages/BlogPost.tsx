@@ -60,7 +60,7 @@ function BlogPostForm() {
       <h1 className="mb-6 text-center text-2xl font-bold text-gray-800">Create a New Blog</h1>
       <form className="bg-white p-6 shadow-md rounded-lg">
         <div className="mb-4">
-          <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="title" className="block text-sm font-medium  text-gray-700">
             Blog Title
           </label>
           <input
@@ -68,7 +68,7 @@ function BlogPostForm() {
             id="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="mt-1 block w-full rounded-md border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            className="mt-1 block w-full rounded-md border-gray-300 p-2 shadow-sm border- focus:border-blue-500 focus:ring-blue-500"
             placeholder="Enter your blog title"
           />
         </div>
